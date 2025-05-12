@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: Employee Service API
+  description: API pour gérer les employés, incluant la création, la récupération, la mise à jour et la suppression.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Serveur local de développement
+paths:
+  /employees:
+    get:
+      summary: Récupérer une liste paginée d'employés
+      description: Retourne une liste paginée d'employés avec des informations de pagination.
+      parameters:
+        - name: page
+          in: query
+          description: Numéro de la page (1-based)
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          description: Nombre d'éléments par page
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Liste paginée d'employés
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponseEmployeeResponse'
+    post:
+      summary: Créer un nouvel employé
+      description: Ajoute un nouvel employé à la base de données.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRequest'
+      responses:
+        '201':
+          description: Employé créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+  /employees/{id}:
+    get:
+      summary: Récupérer un employé par ID
+      description: Retourne les détails d'un employé spécifique.
+      parameters:
+        - name: id
+          in: path
+          description: ID unique de l'employé
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails de l'employé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+        '404':
+          description: Employé non trouvé
+    delete:
+      summary: Supprimer un employé par ID
+      description: Supprime un employé spécifique de la base de données.
+      parameters:
+        - name: id
+          in: path
+          description: ID unique de l'employé
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Employé supprimé avec succès
+        '404':
+          description: Employé non trouvé
+components:
+  schemas:
+    EmployeeRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Prénom de l'employé
+          example: John
+        lastName:
+          type: string
+          description: Nom de famille de l'employé
+          example: Doe
+        email:
+          type: string
+          description: Adresse email de l'employé
+          example: john.doe@example.com
+        phoneNumber:
+          type: string
+          description: Numéro de téléphone de l'employé
+          example: +2301234567
+        department:
+          type: string
+          description: Département de l'employé
+          example: IT
+    EmployeeResponse:
+      type: object
+      properties:
+        employeeId:
+          type: integer
+          description: ID unique de l'employé
+          example: 1
+        firstName:
+          type: string
+          description: Prénom de l'employé
+          example: John
+        lastName:
+          type: string
+          description: Nom de famille de l'employé
+          example: Doe
+        email:
+          type: string
+          description: Adresse email de l'employé
+          example: john.doe@example.com
+        department:
+          type: string
+          description: Département de l'employé
+          example: IT
+        localDateTime:
+          type: string
+          format: date-time
+          description: Date et heure de création de l'employé
+          example: 2023-06-15T10:30:45
+    PaginatedResponseEmployeeResponse:
+      type: object
+      properties:
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployeeResponse'
+        totalElements:
+          type: integer
+          description: Nombre total d'éléments
+          example: 42
+        totalPages:
+          type: integer
+          description: Nombre total de pages
+          example: 5
+        currentPage:
+          type: integer
+          description: Page actuelle (1-based)
+          example: 1
+        pageSize:
+          type: integer
+          description: Nombre d'éléments par page
+          example: 10

@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: employee
+
+  datasource:
+    url: jdbc:h2:mem:employeedb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  doc:
+    api-docs:
+      path: /api-docs
+    swagger-ui:
+      path: /swagger-ui.html
+      operationsSorter: method
+      tagsSorter: alpha
+      tryItOutEnabled: true
+      filter: true
+      syntaxHighlight:
+        activated: true
+    packages-to-scan: io.upskilling.training.employee.controller
