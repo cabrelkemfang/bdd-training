@@ -6,12 +6,11 @@ import io.upskilling.training.employee.exception.InvalidEmailFormatException;
 import io.upskilling.training.employee.exception.InvalidPhoneNumberFormatException;
 import io.upskilling.training.employee.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.UtilityClass;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class EmployeeValidator {
 

@@ -41,7 +41,6 @@ public class ApplicationControllerAdvice {
         return createProblemDetail(HttpStatus.BAD_REQUEST, "Employee Already Exists", ex.getMessage(), ex);
     }
 
-
     @ExceptionHandler(Exception.class)
     public ProblemDetail globalExceptionHandler(Exception ex) {
         return createProblemDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Global Exception", DEFAULT_MESSAGE, ex);
