@@ -24,12 +24,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class EmployeeStepDefinitions {
 
     private static final String API_PATH = "/api/employees";
-    private static final String EMPLOYEE_ID_PARAM = "employee_id";
 
     private Response response;
     private EmployeeRequest employeeRequest;
     private Long employeeId;
-    private Map<String, Object> pathParams = new HashMap<>();
 
     @LocalServerPort
     private Integer port;
@@ -39,10 +37,6 @@ public class EmployeeStepDefinitions {
         // Initialize RestAssured with the random port assigned by Spring Boot
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
-
-        // Reset test state before each scenario
-        pathParams.clear();
-        employeeRequest = null;
     }
 
     @Given("L'utilisateur souhaite créer un employé avec les informations suivantes:")
