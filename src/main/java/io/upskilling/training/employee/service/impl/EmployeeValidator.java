@@ -4,7 +4,7 @@ import io.upskilling.training.employee.dto.EmployeeRequest;
 import io.upskilling.training.employee.exception.EmployeeAlreadyExistsException;
 import io.upskilling.training.employee.exception.InvalidEmailFormatException;
 import io.upskilling.training.employee.exception.InvalidPhoneNumberFormatException;
-import io.upskilling.training.employee.repository.EmployeeRepository;
+import io.upskilling.training.employee.repository.EmployeePersistence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +14,11 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class EmployeeValidator {
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeePersistence employeePersistence;
 
     public void validate(EmployeeRequest employeeRequest) {
         // validate if  user id already present
-        if (employeeRepository.existsByEmail(employeeRequest.getEmail())) {
+        if (employeePersistence.existsByEmail(employeeRequest.getEmail())) {
             throw new EmployeeAlreadyExistsException(employeeRequest);
         }
 
