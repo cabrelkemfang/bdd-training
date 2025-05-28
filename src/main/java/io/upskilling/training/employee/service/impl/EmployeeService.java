@@ -1,4 +1,4 @@
-package io.upskilling.training.employee.service;
+package io.upskilling.training.employee.service.impl;
 
 import io.upskilling.training.employee.dto.EmployeeRequest;
 import io.upskilling.training.employee.dto.EmployeeResponse;
@@ -6,6 +6,7 @@ import io.upskilling.training.employee.dto.PaginatedResponse;
 import io.upskilling.training.employee.exception.EmployeeNotFoundException;
 import io.upskilling.training.employee.mapper.EmployeeMapper;
 import io.upskilling.training.employee.repository.EmployeeRepository;
+import io.upskilling.training.employee.service.IEmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeService {
+public class EmployeeService implements IEmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
