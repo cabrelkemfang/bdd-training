@@ -2,7 +2,8 @@ package io.upskilling.training.employee.controller;
 
 import io.upskilling.training.employee.dto.EmployeeRequest;
 import io.upskilling.training.employee.dto.EmployeeResponse;
-import io.upskilling.training.employee.service.EmployeeService;
+import io.upskilling.training.employee.dto.PaymentRequest;
+import io.upskilling.training.employee.service.impl.EmployeeService;
 import io.upskilling.training.employee.utils.PaginationHeaderUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,14 @@ public class EmployeeController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(employee);
+    }
+
+    @PostMapping(value = "/{employee_id}/payments", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> makePaymentForEmployee(@PathVariable("employee_id") Long employeeId,
+                                                         @RequestBody PaymentRequest paymentRequest) {
+        var paymentResponse = employeeService.makePaymentForEmployee(employeeId, paymentRequest);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(paymentResponse);
     }
 }

@@ -1,4 +1,4 @@
-package io.upskilling.training.employee.service;
+package io.upskilling.training.employee.service.impl;
 
 import io.upskilling.training.employee.dto.EmployeeRequest;
 import io.upskilling.training.employee.exception.EmployeeAlreadyExistsException;
