@@ -24,8 +24,8 @@ public class EmployeeController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<EmployeeResponse>> findEmployee(@RequestParam(defaultValue = "1") int page,
                                                                @RequestParam(defaultValue = "10") int size) {
-        var employee = employeeService.getEmployees(page, size);
 
+        var employee = employeeService.getEmployees(page, size);
         return ResponseEntity.ok()
                 .headers(PaginationHeaderUtil.buildPaginationHeaders(employee))
                 .contentType(MediaType.APPLICATION_JSON)
